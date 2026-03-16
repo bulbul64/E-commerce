@@ -16,7 +16,9 @@ export const router = createBrowserRouter([
           if (!res.ok) throw new Error('Network response was not ok');
           const data = await res.json();
           return data;
+          
         },
+
       },
       {
         path: '/products',

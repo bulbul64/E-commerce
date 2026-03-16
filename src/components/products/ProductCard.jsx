@@ -8,7 +8,7 @@ export default function ProductCard() {
   return (
     <>
       {products.map((product) => (
-        <div className="bg-[##FFF3DB] max-w-xs shadow-lg hover:shadow-2xl transition-all duration-300">
+        <div key={product.id} className="bg-[##FFF3DB] max-w-xs shadow-lg hover:shadow-2xl transition-all duration-300">
           <div className="bg-black/10">
             <img src={product.thumbnail} alt="" />
           </div>
