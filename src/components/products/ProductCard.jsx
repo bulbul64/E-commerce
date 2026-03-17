@@ -1,53 +1,83 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Loading from '../ui/ProductSkeleton';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../features/cart/cartSlice';
 
-export default function ProductCard() {
-  const data = useLoaderData();
-  const products = data.products;
+export default function ProductCard({ filteredProducts }) {
+  const [loadedImages, setLoadedImages] = useState({});
+  const dispatch = useDispatch()
+
+
+  const handleImageLoad = (id) => {
+    setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  if (!filteredProducts) return <Loading />;
+  
 
   return (
     <>
-      {products.map((product) => (
-        <div key={product.id} className="bg-[##FFF3DB] max-w-xs shadow-lg hover:shadow-2xl transition-all duration-300">
-          <div className="bg-black/10">
-            <img src={product.thumbnail} alt="" />
-          </div>
-          <div className=" bg-white    ">
-            <div className="p-4">
-              {/* Product Title */}
-              <h2 className="text-lg font-semibold text-gray-800 truncate">{product.title}</h2>
+      {filteredProducts.map((product) => {
+        const isLoaded = loadedImages[product.id];
 
-              {/* Price and Discount */}
-              <div className="flex items-center mt-2 space-x-2">
-                <p className="text-green-600 font-bold">${product.price}</p>
-                <p className="text-red-500 text-sm line-through">
-                  {product.discountPercentage}% off
-                </p>
+
+        return (
+          <Link to={`/ProductDetail/${product.id}`} key={product.id}>
+            <div  className="bg-white max-w-xs rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+              {/* Image */}
+              <div className="relative w-full h-56 bg-gray-100">
+                {!isLoaded && (
+                  <div className="absolute inset-0 bg-gray-300 animate-pulse rounded-t-2xl"></div>
+                )}
+                <img
+                  src={product.thumbnail}
+                  alt={product.title}
+                  className={`w-full h-56 object-cover rounded-t-2xl ${
+                    !isLoaded ? 'hidden' : 'block'
+                  }`}
+                  onLoad={() => handleImageLoad(product.id)}
+                />
               </div>
 
-              {/* Rating */}
-              <p className="mt-2 text-yellow-500">⭐ {product.rating}</p>
+              {/* Product Info */}
+              {isLoaded && (
+                <div className="p-4 flex flex-col gap-2">
+                  {/* Title */}
+                  <h2 className="text-lg font-semibold text-gray-800 truncate">{product.title}</h2>
 
-              {/* Category */}
-              <p className="mt-1 text-gray-500 text-sm capitalize">{product.category}</p>
+                  {/* Price + Discount */}
+                  <div className="flex items-center gap-2">
+                    <p className="text-green-600 font-bold text-lg">${product.price}</p>
+                    <p className="text-red-500 text-sm line-through">
+                      {product.discountPercentage}% off
+                    </p>
+                  </div>
+
+                  {/* Rating + Category */}
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="text-yellow-500">⭐ {product.rating}</p>
+                    <p className="text-gray-500 text-sm capitalize">{product.category}</p>
+                  </div>
+
+                  {/* Add to Cart */}
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleAddToCart(product);
+                    }}
+                    className="mt-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded-lg transition duration-300">
+                    Add to Cart
+                  </button>
+                </div>
+              )}
             </div>
-            <button className="bg-[#FF7B64] w-full px-4 py-2 text-white"> Add to Cart</button>
-          </div>
-        </div>
-      ))}
+          </Link>
+        );
+      })}
     </>
   );
 }
-
-// {
-//   "id": 1,
-//   "title": "Essence Mascara Lash Princess",
-//   "category": "beauty",
-//   "price": 9.99,
-//   "discountPercentage": 10.48,
-//   "rating": 2.56,
-//   "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
-//   "images": [
-//     "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
-//   ]
-// }

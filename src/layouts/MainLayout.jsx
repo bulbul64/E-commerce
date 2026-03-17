@@ -6,8 +6,8 @@ import { Outlet } from 'react-router-dom'
 
 export default function MainLayout() {
   return (
-    <div className="bg-[#E3E6E6] ">
-      <div className="bg-gray-50 shadow-sm sticky top-0 z-50">
+    <div className="bg-gray-100 h-screen">
+      <div className="bg-gray-50 shadow-sm sticky top-0 z-50 ">
         <Navbar />
       </div>
       <div className="container mx-auto">

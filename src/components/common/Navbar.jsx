@@ -1,6 +1,16 @@
+import { useContext } from 'react';
 import ShoppingBag from '../../assets/ShoppingBag.png'; 
 import emptyShoppingTrolley from '../../assets/empty-shopping-trolley.png';
+import { SearchContext } from '../../context/SearchContext';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 export default function Navbar() {
+
+  const { search, setSearch } = useContext(SearchContext);
+
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  
+
   return (
     <div className="container mx-auto navbar ">
       {/* Logo */}
@@ -16,7 +26,11 @@ export default function Navbar() {
         <input
           type="text"
           placeholder="Search products..."
-          className="input input-bordered w-full "
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          className="input input-bordered focus:outline-none w-full "
         />
       </div>
 
@@ -76,11 +90,17 @@ export default function Navbar() {
 
       {/* Cart */}
       <div className="dropdown dropdown-end mx-2">
-        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+        <div  className="btn btn-ghost btn-circle">
+            <Link to="/cart">
           <div className="indicator">
-            <img src={emptyShoppingTrolley} alt="Cart" className="h-8" />
-            <span className="badge badge-sm indicator-item">8</span>
+              <img
+                src={totalQuantity === 0 ? emptyShoppingTrolley : ShoppingBag}
+                alt="Shopping Trolley"
+                className="w-8"
+              />
+            <span className="badge badge-sm indicator-item">{totalQuantity}</span>
           </div>
+            </Link>
         </div>
       </div>
 
