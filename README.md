@@ -1,16 +1,47 @@
-# React + Vite
+# E-Commerce Practice Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my **e-commerce practice website** built with **React** and **Vite**.  
+It’s a minimal template to practice frontend development and modern React features.
 
-Currently, two official plugins are available:
+🔗 Live Site: https://e-commerce-one-blush-82.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🖥 Features
+- 🚀 Fast and optimized with **Vite**
+- 🧠 Fully typed components (if using TypeScript)
+- 🧰 Clean, responsive UI
+- 🛒 Simple e-commerce features for practice
+- 📱 Works on all screen sizes (mobile, tablet, desktop)
+- 🪄 ESLint integrated for code quality
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧠 Tech Stack
+- **React**
+- **Vite**
+- **JavaScript / TypeScript**
+- **CSS / TailwindCSS (optional)**
+- **ESLint**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📦 Dependencies
+✨ Major dependencies used in this project:
+- `react`
+- `react-dom`
+- `vite`
+- `@vitejs/plugin-react` or `@vitejs/plugin-react-swc`
+- `eslint`
+- `typescript` (if TypeScript template)
+- `react-router-dom` (if used)
+- `axios` (if used for API calls)
+
+---
+
+## 🚀 How to Run Locally
+To run this project on your local machine:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/bulbul64/e-commerce-practice-website.git
